@@ -1,0 +1,12 @@
+main.c:76:5:main	8	static
+main.c:136:6:SystemClock_Config	104	static
+main.c:181:13:MX_TIM1_Init	48	static
+main.c:240:13:MX_USART1_UART_Init	8	static
+main.c:275:13:MX_GPIO_Init	48	static
+main.c:316:6:HAL_TIM_PeriodElapsedCallback	16	static
+main.c:321:6:delay	16	static
+main.c:327:6:Ultrasonic_Read	8	static
+main.c:338:6:HAL_GPIO_EXTI_Callback	16	static
+main.c:347:6:HAL_TIM_IC_CaptureCallback	16	static
+main.c:391:6:Send_Data	8	static
+main.c:409:6:Error_Handler	8	static,ignoring_inline_asm
