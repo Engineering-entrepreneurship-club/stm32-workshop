@@ -37,13 +37,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  00012f4f  00000000  00000000  00031b40  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000dd77  00000000  00000000  00044a8f  2**0
+ 17 .debug_line   0000dd7f  00000000  00000000  00044a8f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000727a9  00000000  00000000  00052806  2**0
+ 18 .debug_str    000727a9  00000000  00000000  0005280e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  000c4faf  2**0
+ 19 .comment      00000053  00000000  00000000  000c4fb7  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00003d64  00000000  00000000  000c5004  2**2
+ 20 .debug_frame  00003d64  00000000  00000000  000c500c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -5340,21 +5340,21 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
  80028aa:	b082      	sub	sp, #8
  80028ac:	af00      	add	r7, sp, #0
  80028ae:	6078      	str	r0, [r7, #4]
-	if(htim->Instance == TIM1)
+	if((htim->Instance == TIM1) && (htim-> Channel == HAL_TIM_ACTIVE_CHANNEL_1))
  80028b0:	687b      	ldr	r3, [r7, #4]
  80028b2:	681b      	ldr	r3, [r3, #0]
  80028b4:	4a46      	ldr	r2, [pc, #280]	; (80029d0 <HAL_TIM_IC_CaptureCallback+0x128>)
  80028b6:	4293      	cmp	r3, r2
  80028b8:	d000      	beq.n	80028bc <HAL_TIM_IC_CaptureCallback+0x14>
  80028ba:	e084      	b.n	80029c6 <HAL_TIM_IC_CaptureCallback+0x11e>
-	{
-		if (htim-> Channel == HAL_TIM_ACTIVE_CHANNEL_1)  // if the interrupt source is channel1
  80028bc:	687b      	ldr	r3, [r7, #4]
  80028be:	7f1b      	ldrb	r3, [r3, #28]
  80028c0:	2b01      	cmp	r3, #1
  80028c2:	d000      	beq.n	80028c6 <HAL_TIM_IC_CaptureCallback+0x1e>
  80028c4:	e07f      	b.n	80029c6 <HAL_TIM_IC_CaptureCallback+0x11e>
-		{
+	{
+	// if the interrupt source is channel1
+
 			if (!Is_First_Captured) // if the first value is not captured
  80028c6:	4b43      	ldr	r3, [pc, #268]	; (80029d4 <HAL_TIM_IC_CaptureCallback+0x12c>)
  80028c8:	781b      	ldrb	r3, [r3, #0]
@@ -5396,7 +5396,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
  8002908:	701a      	strb	r2, [r3, #0]
 				Is_First_Captured = 0; // set it back to false
 			}
-		}
+
 	}
 
 }

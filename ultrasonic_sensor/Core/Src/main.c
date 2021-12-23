@@ -333,10 +333,10 @@ void Ultrasonic_Read()
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
-	if(htim->Instance == TIM1)
+	if((htim->Instance == TIM1) && (htim-> Channel == HAL_TIM_ACTIVE_CHANNEL_1))
 	{
-		if (htim-> Channel == HAL_TIM_ACTIVE_CHANNEL_1)  // if the interrupt source is channel1
-		{
+	// if the interrupt source is channel1
+
 			if (!Is_First_Captured) // if the first value is not captured
 			{
 				First_Val = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1); // read the first value
@@ -367,7 +367,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 				__HAL_TIM_DISABLE_IT(&htim1, TIM_IT_CC1);
 				Is_First_Captured = 0; // set it back to false
 			}
-		}
+
 	}
 
 }
