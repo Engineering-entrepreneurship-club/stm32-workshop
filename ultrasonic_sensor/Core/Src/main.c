@@ -313,11 +313,6 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-//	HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-}
-
 void delay (uint16_t time)
 {
 	__HAL_TIM_SET_COUNTER(&htim1, 0);
@@ -329,20 +324,12 @@ void Ultrasonic_Read()
 	HAL_GPIO_WritePin(US_TRIG_GPIO_Port, US_TRIG_Pin, GPIO_PIN_SET);
 	delay(10);
 	HAL_GPIO_WritePin(US_TRIG_GPIO_Port, US_TRIG_Pin, GPIO_PIN_RESET);
-
 	__HAL_TIM_ENABLE_IT(&htim1, TIM_IT_CC1);
-//	__HAL_TIM_ENABLE_IT(&htim1, TIM_CHANNEL_1);
 
 }
 
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-	if(GPIO_Pin == BUTTON_Pin)
-	{
-//		Ultrasonic_Read();
-	}
-}
-// Let's write the callback function
+
+// the callback function
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {

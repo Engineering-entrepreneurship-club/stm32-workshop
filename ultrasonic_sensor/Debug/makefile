@@ -61,8 +61,8 @@ all: main-build
 main-build: ultrasonic_sensor.elf secondary-outputs
 
 # Tool invocations
-ultrasonic_sensor.elf: $(OBJS) $(USER_OBJS) C:\Users\Engineering\ club\STM32CubeIDE\stm32_workshop\ultrasonic_sensor\STM32F051R8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "ultrasonic_sensor.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"C:\Users\Engineering club\STM32CubeIDE\stm32_workshop\ultrasonic_sensor\STM32F051R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ultrasonic_sensor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+ultrasonic_sensor.elf: $(OBJS) $(USER_OBJS) C:\Users\Engineering\ club\Desktop\stm32-workshop\ultrasonic_sensor\STM32F051R8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "ultrasonic_sensor.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"C:\Users\Engineering club\Desktop\stm32-workshop\ultrasonic_sensor\STM32F051R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ultrasonic_sensor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
