@@ -313,11 +313,6 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-//	HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-}
-
 void delay (uint16_t time)
 {
 	__HAL_TIM_SET_COUNTER(&htim1, 0);
@@ -329,27 +324,19 @@ void Ultrasonic_Read()
 	HAL_GPIO_WritePin(US_TRIG_GPIO_Port, US_TRIG_Pin, GPIO_PIN_SET);
 	delay(10);
 	HAL_GPIO_WritePin(US_TRIG_GPIO_Port, US_TRIG_Pin, GPIO_PIN_RESET);
-
 	__HAL_TIM_ENABLE_IT(&htim1, TIM_IT_CC1);
-//	__HAL_TIM_ENABLE_IT(&htim1, TIM_CHANNEL_1);
 
 }
 
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-	if(GPIO_Pin == BUTTON_Pin)
-	{
-//		Ultrasonic_Read();
-	}
-}
-// Let's write the callback function
+
+// the callback function
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
-	if(htim->Instance == TIM1)
+	if((htim->Instance == TIM1) && (htim-> Channel == HAL_TIM_ACTIVE_CHANNEL_1))
 	{
-		if (htim-> Channel == HAL_TIM_ACTIVE_CHANNEL_1)  // if the interrupt source is channel1
-		{
+	// if the interrupt source is channel1
+
 			if (!Is_First_Captured) // if the first value is not captured
 			{
 				First_Val = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1); // read the first value
@@ -380,7 +367,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 				__HAL_TIM_DISABLE_IT(&htim1, TIM_IT_CC1);
 				Is_First_Captured = 0; // set it back to false
 			}
-		}
+
 	}
 
 }
