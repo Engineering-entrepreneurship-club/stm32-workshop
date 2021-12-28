@@ -381,7 +381,7 @@ void Send_Data()
 //    sprintf(TEXT, "%.2f\r\n", Difference);
 //    sprintf(str, "%d, %d\r\n", First_Val, Sec_Val);
 
-    HAL_UART_Transmit(&huart1, TEXT, sizeof(TEXT), 100);
+    HAL_UART_Transmit_IT(&huart1, TEXT, sizeof(TEXT));
 }
 
 
